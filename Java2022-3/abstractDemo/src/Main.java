@@ -1,9 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-
-        GameCalculator calculator = new KidGameCalculator();
-        calculator.calculate();
-        calculator.gameOver();
-
+        CustomerManager customerManager = new CustomerManager(new MyDatabaseManager());
+        customerManager.getCustomers();
     }
 }
