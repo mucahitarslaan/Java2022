@@ -2,25 +2,28 @@ package business;
 
 import core.logger.IBaseLogger;
 import dataAccess.ICourseDao;
-import entities.Category;
 import entities.Course;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CourseManager {
     private final ICourseDao m_courseDao;
-    private final Course m_course;
     private final IBaseLogger[] m_loggers;
+    private List<Course> courseList;
 
-    public CourseManager(ICourseDao m_courseDao, Course m_course, IBaseLogger[] m_loggers) {
+    public CourseManager(ICourseDao m_courseDao, List<Course> courseList, IBaseLogger[] m_loggers) {
         this.m_courseDao = m_courseDao;
-        this.m_course = m_course;
+        this.courseList = courseList;
         this.m_loggers = m_loggers;
     }
 
     public void add(Course course) throws Exception
     {
-
-    //    if (m_course.getCourseName().equals(course.getCourseName()))
-    //        throw new Exception("Enter a different course name");
+        if (!courseList.contains(course))
+            throw new Exception("Please enter a different Course");
+        else
+            courseList.add(course);
         m_courseDao.add(course);
 
         for (IBaseLogger logger : m_loggers)

@@ -4,23 +4,28 @@ import core.logger.IBaseLogger;
 import dataAccess.ICategoryDao;
 import entities.Category;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CategoryManager {
     private final ICategoryDao m_categoryDao;
-    private final Category m_category;
     private final IBaseLogger[] m_loggers;
+    private  List<Category> categoryList;
 
-
-    public CategoryManager(ICategoryDao categoryDao,Category category, IBaseLogger[] loggers) {
-        m_categoryDao = categoryDao;
-        m_loggers = loggers;
-        m_category =category;
+    public CategoryManager(ICategoryDao categoryDao,List<Category> categoryList, IBaseLogger[] loggers) {
+        this.m_categoryDao = categoryDao;
+        this.m_loggers = loggers;
+        this.categoryList =categoryList;
     }
 
     public void add(Category category) throws Exception
     {
-    //    if (m_category.getName().equals(category.getName()))
-    //        throw new Exception("Enter a different category name");
+        if (!categoryList.contains(category))
+        {
+            throw new Exception("Enter a different Category");
+        }else
+            categoryList.add(category);
         m_categoryDao.add(category);
 
         for (IBaseLogger logger : m_loggers)
