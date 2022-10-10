@@ -3,15 +3,13 @@ package business;
 import core.logger.IBaseLogger;
 import dataAccess.ICategoryDao;
 import entities.Category;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CategoryManager {
     private final ICategoryDao m_categoryDao;
     private final IBaseLogger[] m_loggers;
-    private  List<Category> categoryList;
+    private final List<Category> categoryList;
 
     public CategoryManager(ICategoryDao categoryDao,List<Category> categoryList, IBaseLogger[] loggers) {
         this.m_categoryDao = categoryDao;

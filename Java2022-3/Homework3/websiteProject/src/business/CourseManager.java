@@ -4,13 +4,12 @@ import core.logger.IBaseLogger;
 import dataAccess.ICourseDao;
 import entities.Course;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CourseManager {
     private final ICourseDao m_courseDao;
     private final IBaseLogger[] m_loggers;
-    private List<Course> courseList;
+    private final List<Course> courseList;
 
     public CourseManager(ICourseDao m_courseDao, List<Course> courseList, IBaseLogger[] m_loggers) {
         this.m_courseDao = m_courseDao;

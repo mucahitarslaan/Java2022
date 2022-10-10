@@ -28,19 +28,19 @@ public class Main {
 
 
         Course course1 = new Course(1,"Java 2022", "Java" , 5000, instructor1);
-        Course course2 = new Course(2,"Java 2022-2", "Java" , -6500, instructor2);
+        Course course2 = new Course(2,"Java 2022-2", "Java" , 6500, instructor2);
         List<Course> courseList = new ArrayList<>();
         courseList.add(course1);
         courseList.add(course2);
 
 
         Category category1 = new Category("Programlama" , "Java" );
-        Category category2 = new Category("Programlama" , "Java" );
+        Category category2 = new Category("Programlama" , "C#" );
         List<Category> categoryList = new ArrayList<>();
         categoryList.add(category1);
         categoryList.add(category2);
 
-        IInstructorDao instructorDao = new JdbcInstructorDao();
+        IInstructorDao instructorDao = new HibernateInstructorDao();
         ICourseDao courseDao = new JdbcCourseDao();
         ICategoryDao categoryDao = new JdbcCategoryDao();
 
@@ -50,6 +50,7 @@ public class Main {
 
         instructorManager.add(instructor1);
         instructorManager.add(instructor2);
+        instructorManager.delete(instructor1);
         System.out.println("---------------------");
 
         courseManager.add(course1);
