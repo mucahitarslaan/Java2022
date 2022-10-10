@@ -28,7 +28,7 @@ public class Main {
 
 
         Course course1 = new Course(1,"Java 2022", "Java" , 5000, instructor1);
-        Course course2 = new Course(2,"Java 2022-2", "Java" , 6500, instructor2);
+        Course course2 = new Course(2,"Java 2022-2", "Java" , -6500, instructor2);
         List<Course> courseList = new ArrayList<>();
         courseList.add(course1);
         courseList.add(course2);

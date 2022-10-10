@@ -20,7 +20,7 @@ public class CourseManager {
 
     public void add(Course course) throws Exception
     {
-        if (!courseList.contains(course))
+        if (!courseList.contains(course) && course.getCoursePrice()<0)
             throw new Exception("Please enter a different Course");
         else
             courseList.add(course);
