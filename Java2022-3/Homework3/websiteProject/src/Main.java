@@ -17,12 +17,12 @@ import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-
         IBaseLogger[] loggers = new IBaseLogger[]{new DatabaseLogger(),new FileLogger(),new EmailLogger()};
 
         Instructor instructor1 = new Instructor(1,"Engin", "Demiroğ");
         Instructor instructor2 = new Instructor(2,"Mücahit", "Arslan");
         List<Instructor> instructorList = new ArrayList<>();
+
         instructorList.add(instructor1);
         instructorList.add(instructor2);
 
@@ -30,6 +30,7 @@ public class Main {
         Course course1 = new Course(1,"Java 2022", "Java" , 5000, instructor1);
         Course course2 = new Course(2,"Java 2022-2", "Java" , 6500, instructor2);
         List<Course> courseList = new ArrayList<>();
+
         courseList.add(course1);
         courseList.add(course2);
 
@@ -37,6 +38,7 @@ public class Main {
         Category category1 = new Category("Programlama" , "Java" );
         Category category2 = new Category("Programlama" , "C#" );
         List<Category> categoryList = new ArrayList<>();
+
         categoryList.add(category1);
         categoryList.add(category2);
 
