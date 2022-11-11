@@ -59,6 +59,5 @@ public class LanguageManager implements ILanguageService
                 return languageRepository.getById(id);
         }
         throw new Exception("Invalid id");
-        //return languageRepository.getById(id);
     }
 }
