@@ -46,7 +46,7 @@ public class InMemoryLanguageRepository implements ILanguageRepository {
         {
             if (lang.getId() == id)
             {
-                languages.remove(id -1);
+                languages.remove(id);
             }
         }
         throw new Exception("Invalid id");
@@ -55,7 +55,7 @@ public class InMemoryLanguageRepository implements ILanguageRepository {
     public ProgrammingLanguage getById(int id) throws Exception {
         for (ProgrammingLanguage language : languages) {
             if (language.getId() == id) {
-                return languages.get(id-1);
+                return languages.get(id);
             }
         }
         throw new Exception("Invalid id");
