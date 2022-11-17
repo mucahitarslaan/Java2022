@@ -1,4 +1,4 @@
-package com.mucahitarslan.Devs.business.responses.programmingLanguage;
+package com.mucahitarslan.Devs.business.responses.language;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdProgrammingLanguage {
-    private int id;
+public class GetByIdLanguageResponse {
     private String name;
 }
