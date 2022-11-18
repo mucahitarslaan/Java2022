@@ -1,12 +1,7 @@
 package com.mucahitarslan.Devs.webApi.controllers;
 
 import com.mucahitarslan.Devs.business.abstracts.ITechnologyService;
-import com.mucahitarslan.Devs.business.requests.technology.CreateTechnologyRequest;
-import com.mucahitarslan.Devs.business.requests.technology.UpdateTechnologyRequest;
-import com.mucahitarslan.Devs.business.responses.technology.GetAllTechnologiesResponse;
-import com.mucahitarslan.Devs.business.responses.technology.GetByIdTechnologyResponse;
 import com.mucahitarslan.Devs.entities.concretes.Technology;
-import org.apache.catalina.mbeans.SparseUserDatabaseMBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,52 +19,52 @@ public class TechnologyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GetAllTechnologiesResponse>> getAll()
+    public ResponseEntity<List<Technology>> getAll()
     {
-        List<GetAllTechnologiesResponse> responseList = technologyService.getAll();
-        if (responseList.isEmpty())
+        List<Technology> technologies = technologyService.getAll();
+        if (technologies.isEmpty())
         {
             return ResponseEntity.noContent().build();
         }
-        return new ResponseEntity<>(responseList, HttpStatus.OK);
+        return new ResponseEntity<>(technologies, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetByIdTechnologyResponse> getById(int id)
+    public ResponseEntity<Technology> getById(@PathVariable int id)
     {
-        GetByIdTechnologyResponse response = technologyService.getById(id);
-        if (Objects.nonNull(response))
+        Technology technology = technologyService.getById(id);
+        if (Objects.nonNull(technology))
         {
-            return new ResponseEntity<>(response,HttpStatus.OK);
+            return new ResponseEntity<>(technology,HttpStatus.OK);
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ResponseEntity<CreateTechnologyRequest> add(CreateTechnologyRequest createTechnologyRequest)
+    public ResponseEntity<Technology> add(@RequestBody Technology technology)
     {
-        Technology technology = technologyService.add(createTechnologyRequest);
-        if (Objects.nonNull(technology))
+        Technology technology1 = technologyService.add(technology);
+        if (Objects.nonNull(technology1))
         {
-            return new ResponseEntity<>(createTechnologyRequest,HttpStatus.OK);
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<UpdateTechnologyRequest> update(@PathVariable int id, UpdateTechnologyRequest updateTechnologyRequest)
-    {
-        Technology technology = technologyService.update(id,updateTechnologyRequest);
-        if (Objects.nonNull(technology))
-        {
-            return new ResponseEntity<>(updateTechnologyRequest,HttpStatus.OK);
+            return new ResponseEntity<>(technology1,HttpStatus.OK);
         }
         return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id)
+    public void deleteById(@PathVariable int id)
     {
         technologyService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Technology> update(@PathVariable int id, @RequestBody Technology technology)
+    {
+        Technology technology1 = technologyService.update(id,technology);
+        if (Objects.nonNull(technology1))
+        {
+            return new ResponseEntity<>(technology1,HttpStatus.OK);
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
