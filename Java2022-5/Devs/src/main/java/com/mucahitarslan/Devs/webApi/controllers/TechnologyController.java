@@ -1,6 +1,9 @@
 package com.mucahitarslan.Devs.webApi.controllers;
 
 import com.mucahitarslan.Devs.business.abstracts.ITechnologyService;
+import com.mucahitarslan.Devs.business.requests.technology.TechnologyRequest;
+import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
+import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
 import com.mucahitarslan.Devs.entities.concretes.Technology;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,34 +22,34 @@ public class TechnologyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Technology>> getAll()
+    public ResponseEntity<List<TechnologyListResponse>> getAll()
     {
-        List<Technology> technologies = technologyService.getAll();
-        if (technologies.isEmpty())
+        List<TechnologyListResponse> technologyListResponses = technologyService.getAll();
+        if (technologyListResponses.isEmpty())
         {
             return ResponseEntity.noContent().build();
         }
-        return new ResponseEntity<>(technologies, HttpStatus.OK);
+        return new ResponseEntity<>(technologyListResponses, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Technology> getById(@PathVariable int id)
+    public ResponseEntity<TechnologyResponse> getById(@PathVariable int id)
     {
-        Technology technology = technologyService.getById(id);
-        if (Objects.nonNull(technology))
+        TechnologyResponse technologyResponse = technologyService.getById(id);
+        if (Objects.nonNull(technologyResponse))
         {
-            return new ResponseEntity<>(technology,HttpStatus.OK);
+            return new ResponseEntity<>(technologyResponse,HttpStatus.OK);
         }
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    public ResponseEntity<Technology> add(@RequestBody Technology technology)
+    public ResponseEntity<TechnologyResponse> add(@RequestBody TechnologyRequest technologyRequest)
     {
-        Technology technology1 = technologyService.add(technology);
-        if (Objects.nonNull(technology1))
+        TechnologyResponse technologyResponse = technologyService.add(technologyRequest);
+        if (Objects.nonNull(technologyResponse))
         {
-            return new ResponseEntity<>(technology1,HttpStatus.OK);
+            return new ResponseEntity<>(technologyResponse,HttpStatus.OK);
         }
         return ResponseEntity.badRequest().build();
     }
@@ -58,12 +61,12 @@ public class TechnologyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Technology> update(@PathVariable int id, @RequestBody Technology technology)
+    public ResponseEntity<TechnologyResponse> update(@PathVariable int id, @RequestBody Technology technology)
     {
-        Technology technology1 = technologyService.update(id,technology);
-        if (Objects.nonNull(technology1))
+        TechnologyResponse technologyResponse = technologyService.update(id,technology);
+        if (Objects.nonNull(technologyResponse))
         {
-            return new ResponseEntity<>(technology1,HttpStatus.OK);
+            return new ResponseEntity<>(technologyResponse,HttpStatus.OK);
         }
         return ResponseEntity.badRequest().build();
     }
