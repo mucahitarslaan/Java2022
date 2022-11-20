@@ -2,6 +2,7 @@ package com.mucahitarslan.Devs.webApi.controllers;
 
 import com.mucahitarslan.Devs.business.abstracts.ILanguageService;
 import com.mucahitarslan.Devs.business.requests.language.LanguageRequest;
+import com.mucahitarslan.Devs.business.requests.language.LanguageUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.language.LanguageListResponse;
 import com.mucahitarslan.Devs.business.responses.language.LanguageResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
@@ -64,9 +65,9 @@ public class LanguagesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LanguageResponse> update(@PathVariable int id,@RequestBody Language language)
+    public ResponseEntity<LanguageResponse> update(@PathVariable int id,@RequestBody LanguageUpdateRequest languageUpdateRequest)
     {
-        LanguageResponse languageResponse = languageService.update(id,language);
+        LanguageResponse languageResponse = languageService.update(id,languageUpdateRequest);
         if (Objects.nonNull(languageResponse))
         {
             return new ResponseEntity<>(languageResponse,HttpStatus.OK);

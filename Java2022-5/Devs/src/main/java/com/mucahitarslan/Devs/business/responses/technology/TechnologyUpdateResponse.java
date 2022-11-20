@@ -3,8 +3,8 @@ package com.mucahitarslan.Devs.business.responses.technology;
 import lombok.Data;
 
 @Data
-public class TechnologyResponse {
+public class TechnologyUpdateResponse {
     private int id;
     private String name;
-    private String languageName;
+
 }

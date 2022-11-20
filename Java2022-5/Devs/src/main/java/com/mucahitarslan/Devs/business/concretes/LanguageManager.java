@@ -2,6 +2,7 @@ package com.mucahitarslan.Devs.business.concretes;
 
 import com.mucahitarslan.Devs.business.abstracts.ILanguageService;
 import com.mucahitarslan.Devs.business.requests.language.LanguageRequest;
+import com.mucahitarslan.Devs.business.requests.language.LanguageUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.language.LanguageListResponse;
 import com.mucahitarslan.Devs.business.responses.language.LanguageResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
@@ -44,12 +45,12 @@ public class LanguageManager implements ILanguageService {
     }
 
     @Override
-    public LanguageResponse update(int id, Language language) {
+    public LanguageResponse update(int id, LanguageUpdateRequest languageUpdateRequest) {
         Optional<Language> inDbLanguage = languageRepository.findById(id);
         if (inDbLanguage.isPresent())
         {
             Language language1 = inDbLanguage.get();
-            language1.setName(language.getName());
+            language1.setName(languageUpdateRequest.getName());
             return toLanguageResponse(languageRepository.save(language1));
         }
         return null;

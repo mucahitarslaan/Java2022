@@ -2,8 +2,10 @@ package com.mucahitarslan.Devs.webApi.controllers;
 
 import com.mucahitarslan.Devs.business.abstracts.ITechnologyService;
 import com.mucahitarslan.Devs.business.requests.technology.TechnologyRequest;
+import com.mucahitarslan.Devs.business.requests.technology.TechnologyUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
+import com.mucahitarslan.Devs.business.responses.technology.TechnologyUpdateResponse;
 import com.mucahitarslan.Devs.entities.concretes.Technology;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,9 +63,9 @@ public class TechnologyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TechnologyResponse> update(@PathVariable int id, @RequestBody Technology technology)
+    public ResponseEntity<TechnologyResponse> update(@PathVariable int id, @RequestBody TechnologyUpdateRequest technologyUpdateRequest)
     {
-        TechnologyResponse technologyResponse = technologyService.update(id,technology);
+        TechnologyResponse technologyResponse = technologyService.update(id,technologyUpdateRequest);
         if (Objects.nonNull(technologyResponse))
         {
             return new ResponseEntity<>(technologyResponse,HttpStatus.OK);

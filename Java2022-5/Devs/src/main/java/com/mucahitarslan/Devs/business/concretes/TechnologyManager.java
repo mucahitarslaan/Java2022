@@ -3,8 +3,10 @@ package com.mucahitarslan.Devs.business.concretes;
 import com.mucahitarslan.Devs.business.abstracts.ILanguageService;
 import com.mucahitarslan.Devs.business.abstracts.ITechnologyService;
 import com.mucahitarslan.Devs.business.requests.technology.TechnologyRequest;
+import com.mucahitarslan.Devs.business.requests.technology.TechnologyUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
+import com.mucahitarslan.Devs.business.responses.technology.TechnologyUpdateResponse;
 import com.mucahitarslan.Devs.core.utils.TechnologyModel;
 import com.mucahitarslan.Devs.dataAccess.abstracts.ITechnologyRepository;
 import com.mucahitarslan.Devs.entities.concretes.Language;
@@ -50,13 +52,25 @@ public class TechnologyManager implements ITechnologyService {
         return TechnologyModel.toTechnologyResponse(technologyRepository.save(technology));
     }
 
+//    @Override
+//    public TechnologyResponse update(int id, Technology technology) {
+//        Optional<Technology> inDbTechnology = technologyRepository.findById(id);
+//        if (inDbTechnology.isPresent())
+//        {
+//            Technology technology1 = inDbTechnology.get();
+//            technology1.setName(technology.getName());
+//            return TechnologyModel.toTechnologyResponse(technologyRepository.save(technology1));
+//        }
+//        return null;
+//    }
+
     @Override
-    public TechnologyResponse update(int id, Technology technology) {
+    public TechnologyResponse update(int id, TechnologyUpdateRequest technologyUpdateRequest) {
         Optional<Technology> inDbTechnology = technologyRepository.findById(id);
         if (inDbTechnology.isPresent())
         {
             Technology technology1 = inDbTechnology.get();
-            technology1.setName(technology.getName());
+            technology1.setName(technologyUpdateRequest.getName());
             return TechnologyModel.toTechnologyResponse(technologyRepository.save(technology1));
         }
         return null;
