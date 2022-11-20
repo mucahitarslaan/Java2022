@@ -6,13 +6,10 @@ import com.mucahitarslan.Devs.business.requests.language.LanguageUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.language.LanguageListResponse;
 import com.mucahitarslan.Devs.business.responses.language.LanguageResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
-import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
-import com.mucahitarslan.Devs.entities.concretes.Language;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
