@@ -6,5 +6,5 @@ import lombok.Data;
 public class TechnologyResponse {
     private int id;
     private String name;
-    private int languageId;
+    private String  languageName;
 }

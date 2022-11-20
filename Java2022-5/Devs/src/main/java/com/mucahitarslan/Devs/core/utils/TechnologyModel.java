@@ -6,11 +6,13 @@ import com.mucahitarslan.Devs.entities.concretes.Technology;
 
 public class TechnologyModel {
 
+
     public static TechnologyListResponse toTechnologyListResponse(Technology technology)
     {
         TechnologyListResponse technologyListResponse = new TechnologyListResponse();
         technologyListResponse.setId(technology.getId());
         technologyListResponse.setName(technology.getName());
+        technologyListResponse.setLanguageName(technology.getLanguage().getName());
         return technologyListResponse;
     }
 
@@ -21,7 +23,7 @@ public class TechnologyModel {
         technologyResponse.setName(technology.getName());
         if (technology.getLanguage() != null)
         {
-            technologyResponse.setLanguageId(technology.getLanguage().getId());
+            technologyResponse.setLanguageName(technology.getLanguage().getName());
         }
         return technologyResponse;
     }
