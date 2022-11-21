@@ -5,8 +5,6 @@ import com.mucahitarslan.Devs.business.requests.technology.TechnologyRequest;
 import com.mucahitarslan.Devs.business.requests.technology.TechnologyUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
-import com.mucahitarslan.Devs.business.responses.technology.TechnologyUpdateResponse;
-import com.mucahitarslan.Devs.entities.concretes.Technology;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

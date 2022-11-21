@@ -12,7 +12,7 @@ public class TechnologyModel {
         TechnologyListResponse technologyListResponse = new TechnologyListResponse();
         technologyListResponse.setId(technology.getId());
         technologyListResponse.setName(technology.getName());
-        technologyListResponse.setLanguageName(technology.getLanguage().getName());
+        technologyListResponse.setLanguageId(technology.getLanguage().getId());
         return technologyListResponse;
     }
 

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class LanguageManager implements ILanguageService {
@@ -28,6 +29,11 @@ public class LanguageManager implements ILanguageService {
     @Override
     public List<LanguageListResponse> getAll()
     {
+        /*return StreamSupport.stream(languageRepository.findAll().spliterator(),false)
+                .map(this::toLanguageListResponse)
+                .collect(Collectors.toList());
+         */
+
         return languageRepository.findAll().stream().map(this::toLanguageListResponse).collect(Collectors.toList());
     }
 
@@ -39,6 +45,10 @@ public class LanguageManager implements ILanguageService {
 
     @Override
     public LanguageResponse add(LanguageRequest languageRequest) {
+        if (isNameExist(languageRequest.getName()))
+        {
+            throw new UnsupportedOperationException("name is exist in db");
+        }
         Language language = new Language();
         language.setName(languageRequest.getName());
         return toLanguageResponse(languageRepository.save(language));
@@ -46,6 +56,10 @@ public class LanguageManager implements ILanguageService {
 
     @Override
     public LanguageResponse update(int id, LanguageUpdateRequest languageUpdateRequest) {
+        if (isNameExist(languageUpdateRequest.getName()))
+        {
+            throw new UnsupportedOperationException("name is exist in db");
+        }
         Optional<Language> inDbLanguage = languageRepository.findById(id);
         if (inDbLanguage.isPresent())
         {
@@ -100,4 +114,10 @@ public class LanguageManager implements ILanguageService {
         }
         return null;
     }
+
+    private boolean isNameExist(String name)
+    {
+        return languageRepository.existsByNameIgnoreCase(name);
+    }
+
 }

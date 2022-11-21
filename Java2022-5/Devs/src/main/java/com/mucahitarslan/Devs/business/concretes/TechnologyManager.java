@@ -6,7 +6,6 @@ import com.mucahitarslan.Devs.business.requests.technology.TechnologyRequest;
 import com.mucahitarslan.Devs.business.requests.technology.TechnologyUpdateRequest;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyListResponse;
 import com.mucahitarslan.Devs.business.responses.technology.TechnologyResponse;
-import com.mucahitarslan.Devs.business.responses.technology.TechnologyUpdateResponse;
 import com.mucahitarslan.Devs.core.utils.TechnologyModel;
 import com.mucahitarslan.Devs.dataAccess.abstracts.ITechnologyRepository;
 import com.mucahitarslan.Devs.entities.concretes.Language;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class TechnologyManager implements ITechnologyService {
@@ -43,13 +41,15 @@ public class TechnologyManager implements ITechnologyService {
 
     @Override
     public TechnologyResponse add(TechnologyRequest technologyRequest) {
-        Technology technology = new Technology();
-        technology.setName(technologyRequest.getName());
-        Language language = languageService.getLanguageById(technologyRequest.getLanguageId());
-        if (Objects.nonNull(language))
-        {
-            technology.setLanguage(language);
+        if (isNameExist(technologyRequest.getName())) {
+            throw new UnsupportedOperationException("name is exist in db");
         }
+            Technology technology = new Technology();
+            technology.setName(technologyRequest.getName());
+            Language language = languageService.getLanguageById(technologyRequest.getLanguageId());
+            if (Objects.nonNull(language)) {
+                technology.setLanguage(language);
+            }
         return TechnologyModel.toTechnologyResponse(technologyRepository.save(technology));
     }
 
@@ -67,6 +67,10 @@ public class TechnologyManager implements ITechnologyService {
 
     @Override
     public TechnologyResponse update(int id, TechnologyUpdateRequest technologyUpdateRequest) {
+        if (isNameExist(technologyUpdateRequest.getName()))
+        {
+            throw new UnsupportedOperationException("name is exist in db");
+        }
         Optional<Technology> inDbTechnology = technologyRepository.findById(id);
         if (inDbTechnology.isPresent())
         {
@@ -80,6 +84,11 @@ public class TechnologyManager implements ITechnologyService {
     @Override
     public void delete(int id) {
         technologyRepository.deleteById(id);
+    }
+
+    private boolean isNameExist(String name)
+    {
+        return  technologyRepository.existsByNameIgnoreCase(name);
     }
 
 }
